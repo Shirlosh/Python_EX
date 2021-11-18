@@ -12,11 +12,11 @@ FILE_FORMAT = "json"
 def main():
     folder_path = str(sys.argv[1])
     io_mgr = SubProcessInputOutputHandler(folder_path, FILE_FORMAT)
-    API_process = VirusTotalProcess()
+    VT_process = VirusTotalProcess()
 
     while is_contain_format(folder_path, FILE_FORMAT):
         connector_params = io_mgr.connector_params
-        connector_result = API_process.run(connector_params)
+        connector_result = VT_process.run(connector_params)
         io_mgr.end(connector_result)
 
 
