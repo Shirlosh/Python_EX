@@ -4,7 +4,7 @@ import sys
 from pathlib import Path
 
 from Ex.Assert.SetInterval import SetInterval
-from Ex.VirusTotal.VirusAPI import VirusAPI
+from Ex.VirusTotal.VirusTotalProcess import VirusAPI
 
 interval_id = None
 

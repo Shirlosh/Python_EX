@@ -3,6 +3,8 @@ from Ex.IO.SubProcessInputOutputHandler import SubProcessInputOutputHandler
 import sys
 import os
 
+from Ex.VirusTotal.VirusTotalProcess import VirusTotalProcess
+
 interval_id = None
 FILE_FORMAT = "json"
 
@@ -10,11 +12,11 @@ FILE_FORMAT = "json"
 def main():
     folder_path = str(sys.argv[1])
     io_mgr = SubProcessInputOutputHandler(folder_path, FILE_FORMAT)
+    API_process = VirusTotalProcess()
 
     while is_contain_format(folder_path, FILE_FORMAT):
         connector_params = io_mgr.connector_params
-        checker = VirusTotalProcess()
-        connector_result = checker.check()
+        connector_result = API_process.run(connector_params)
         io_mgr.end(connector_result)
 
 
@@ -26,6 +28,7 @@ def is_contain_format(folder_path, prefix):
         return False
 
 
+#TODO: redesign this:
 if __name__ == "__main__":
     try:
         if os.path.exists(sys.argv[1]):

@@ -3,7 +3,8 @@ class ConnectorSettings(object):
     script_file_path = None  # string - the file path to the connector script
     connector_name = None  # string - connector name
     params = None  # ConnectorParams object - see below
-    output_folder_path = None # string - file path for connector output
+    output_folder_path = None  # string - file path for connector output
+
 
 class ConnectorParams(object):
     source_folder_path = None  # string - file path for entity list files
