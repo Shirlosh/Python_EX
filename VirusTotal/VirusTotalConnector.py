@@ -1,9 +1,9 @@
 import glob
-from Ex.IO.SubProcessInputOutputHandler import SubProcessInputOutputHandler
+from IO.SubProcessInputOutputHandler import SubProcessInputOutputHandler
 import sys
 import os
 
-from Ex.VirusTotal.VirusTotalProcess import VirusTotalProcess
+from VirusTotal.VirusTotalProcess import VirusTotalProcess
 
 interval_id = None
 FILE_FORMAT = "json"
@@ -28,7 +28,7 @@ def is_contain_format(folder_path, prefix):
         return False
 
 
-#TODO: redesign this:
+# TODO: redesign this:
 if __name__ == "__main__":
     try:
         if os.path.exists(sys.argv[1]):

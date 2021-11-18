@@ -1,7 +1,10 @@
+import base64
 import json
+import random
 
 import requests
-from Ex.Assert.DataModels import ConnectorParams, ConnectorResult
+
+from Assert.DataModels import ConnectorParams, ConnectorResult
 
 
 class VirusTotalProcess:
@@ -9,12 +12,16 @@ class VirusTotalProcess:
     __VT_URL = "https://www.virustotal.com/api/v3/urls/"
     __urls = None
 
-    def run(self, connector_params : ConnectorParams):
-        #res = ConnectorResult()
+    def run(self, connector_params: ConnectorParams):
+        res = ConnectorResult()
+        res.alerts = {}
+
         self.__init_urls(connector_params.source_folder_path)
 
         #for i in range(self.connector_params.iteration_entities_count):
-
+        url = random.choice(self.__urls)
+        self.__scanURL(url)
+        #delete url from the list
 
     def __scanURL(self, resource):
         headers = {
@@ -22,7 +29,8 @@ class VirusTotalProcess:
             "x-apikey": self.__API_KEY
         }
 
-        url = self.__buildURLWithResource(resource)
+        url_id = base64.urlsafe_b64encode(resource.encode()).decode().strip("=")
+        url = self.__buildURLWithResource(url_id)
         response = requests.request("GET", url, headers=headers)
         print(response.text)
 
@@ -32,6 +40,4 @@ class VirusTotalProcess:
     def __init_urls(self, file_path):
         with open(file_path) as json_file:
             data = json.load(json_file)
-            aList = json.dumps(data)
-            print(data)
-        self.__VT_URL = None;
+        self.__urls = data

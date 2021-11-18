@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from Ex.Assert.DataModels import ConnectorParams
+from Assert.DataModels import ConnectorParams
 
 
 class SubProcessInputOutputHandler(object):
