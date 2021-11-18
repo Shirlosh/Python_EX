@@ -2,7 +2,6 @@ import glob
 from IO.SubProcessInputOutputHandler import SubProcessInputOutputHandler
 import sys
 import os
-
 from VirusTotal.VirusTotalProcess import VirusTotalProcess
 
 interval_id = None
