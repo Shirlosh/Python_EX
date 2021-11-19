@@ -30,7 +30,7 @@ def is_contain_format(folder_path, prefix):
 
 
 def done_suffix(file_path):
-    new_file_path = file_path + ".done"
+    new_file_path = str(file_path) + ".done"
     os.rename(file_path, new_file_path)
 
 

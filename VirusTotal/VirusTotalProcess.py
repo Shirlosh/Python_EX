@@ -61,40 +61,7 @@ class VirusTotalProcess:
     def deleteURL_from_list(self, url):
         self.__urls.remove(url)
 
-    # create a ConnectorResponse from a VT response
-    # evaluating the url using 'reputation' field
+    # s
     def handle_response(self, resource, response):
         data = json.loads(response.content)
-        rep = data['data']['attributes']['reputation']
-
-        if rep >= 0:
-            result = "not suspicious"
-        else:
-            result = self.format_response_answer(data)
-
-        self.__connector_result.alerts[resource] = result
-        print(resource, ':', result) #TODO: delete debug
-
-    # formatting the result to a string result
-    # the result contains the malicious/ suspicious files name and amount
-    def format_response_answer(self, data):
-        stats: dict = data['data']['attributes']['last_analysis_stats']
-        webs: dict = data['data']['attributes']['last_analysis_results']
-
-        result = "** suspicious **" + os.linesep
-        result += '\t' + str(stats.get("malicious")) + " malicious files: " + os.linesep
-        result += self.find_specific_category(webs, "malicious")
-        result += '\t' + str(stats.get("suspicious")) + " suspicious files: " + os.linesep
-        result += self.find_specific_category(webs, "suspicious")
-
-        return result
-
-    def find_specific_category(self, webs_dir, category):
-        res = ""
-        for k in webs_dir.items():
-            var = k[1].get('category')
-            if var == category:
-                res += '\t\t'
-                res += k[1].get("engine_name")
-                res += os.linesep
-        return res
+        self.__connector_result.alerts[resource] = data
