@@ -16,7 +16,7 @@ class SubProcessInputOutputHandler(object):
     def connector_params(self):
         result = ConnectorParams()
         result.source_folder_path = self.get_random_file()
-        result.iteration_count = input("please enter a number of entities to read from " + str(self.__file_path))
+        result.iteration_entities_count = input("please enter a number of entities to read from " + str(self.__file_path))
         return result
 
     def end(self, connector_result):

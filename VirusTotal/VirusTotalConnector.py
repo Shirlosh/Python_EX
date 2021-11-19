@@ -2,6 +2,7 @@ import glob
 from IO.SubProcessInputOutputHandler import SubProcessInputOutputHandler
 import sys
 import os
+
 from VirusTotal.VirusTotalProcess import VirusTotalProcess
 
 interval_id = None
@@ -17,6 +18,7 @@ def main():
         connector_params = io_mgr.connector_params
         connector_result = VT_process.run(connector_params)
         io_mgr.end(connector_result)
+        done_suffix(connector_params.source_folder_path)
 
 
 def is_contain_format(folder_path, prefix):
@@ -25,6 +27,11 @@ def is_contain_format(folder_path, prefix):
         return True
     else:
         return False
+
+
+def done_suffix(file_path):
+    new_file_path = file_path + ".done"
+    os.rename(file_path, new_file_path)
 
 
 # TODO: redesign this:
