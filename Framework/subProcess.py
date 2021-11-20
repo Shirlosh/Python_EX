@@ -16,9 +16,9 @@ class SubProcessFactory:
     def get_connector_setting(self):
         return self.__connector_settings
 
-    def createSubProcess(self, process_name):
+    def createSubProcess(self):
         p = subprocess.Popen(
-            process_name,
+            self.__connector_settings.script_file_path,
             shell=True,
             stdin=subprocess.PIPE,
             stdout=subprocess.PIPE,

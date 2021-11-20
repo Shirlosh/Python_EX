@@ -10,15 +10,14 @@ FILE_FORMAT = "json"
 
 
 def main():
-    folder_path = str(sys.argv[1])
-    io_mgr = SubProcessInputOutputHandler(folder_path, FILE_FORMAT)
+    #folder_path = str(sys.argv[1])
+    #io_mgr = SubProcessInputOutputHandler(folder_path, FILE_FORMAT)
+    io_mgr = SubProcessInputOutputHandler()
     VT_process = VirusTotalProcess()
-
-    while is_contain_format(folder_path, FILE_FORMAT):
-        connector_params = io_mgr.connector_params
-        connector_result = VT_process.run(connector_params)
-        io_mgr.end(connector_result)
-        done_suffix(connector_params.source_folder_path)
+    connector_params = io_mgr.connector_params
+    connector_result = VT_process.run(connector_params)
+    io_mgr.end(connector_result)
+    done_suffix(connector_params.source_folder_path)
 
 
 def is_contain_format(folder_path, prefix):
@@ -36,11 +35,11 @@ def done_suffix(file_path):
 
 # TODO: redesign this:
 if __name__ == "__main__":
-    try:
-        if os.path.exists(sys.argv[1]):
-            main()
-            # TODO: setinterval(main, time) instead of calling main
-        else:
-            raise ImportError("the requested folder path is invalid")
-    except Exception as e:
-        print(e.__class__)
+    main()
+    # try:
+    #         main()
+    #         # TODO: setinterval(main, time) instead of calling main
+    #     else:
+    #         raise ImportError("the requested folder path is invalid")
+    # except Exception as e:
+    #     print(e.__class__)

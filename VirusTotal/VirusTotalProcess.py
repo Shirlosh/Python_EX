@@ -13,11 +13,13 @@ class VirusTotalProcess:
     __VT_URL = "https://www.virustotal.com/api/v3/urls/"
     __urls: list
     __connector_result = ConnectorResult()
+    folder_path = 'C:\\\\Users\\\\oveda\\\\Desktop\\\\Python Siemplfy\\\\asserts\\\\lib\\\\URLSource1\\\\Source1.json'
 
     #  launch the desired amount of URL requests to the server
     #  returns ConnectorResult as an answer (a dictionary of answers)
     def run(self, connector_params: ConnectorParams):
         self.__init_urls(connector_params.source_folder_path)
+        #self.__init_urls(self.folder_path)
         self.__init_connectorResult()
         iteration_count = int(connector_params.iteration_entities_count)
 
@@ -49,8 +51,9 @@ class VirusTotalProcess:
 
     # init URLS array variable
     def __init_urls(self, file_path):
-        with open(file_path) as json_file:
-            data = json.load(json_file)
+        #with open(file_path, 'rb') as json_file:
+            #data = json.loads(json_file)
+        data = json.loads(open(file_path).read())
         self.__urls = data
 
     # init connector result

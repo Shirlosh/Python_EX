@@ -1,6 +1,6 @@
+import json
 import os
 from pathlib import Path
-
 from asserts.DataModels import ConnectorParams, ConnectorResult
 
 
@@ -8,17 +8,18 @@ class SubProcessInputOutputHandler(object):
     __folder_path = None
     __file_format = None
     __file_path = None
-
-    def __init__(self, folder_path, file_format):
-        self.__folder_path = folder_path
-        self.__file_format = file_format
+    #
+    # def __init__(self, folder_path, file_format):
+    #     self.__folder_path = folder_path
+    #     self.__file_format = file_format
 
     @property
     def connector_params(self):
         result = ConnectorParams()
-        result.source_folder_path = self.get_random_file()
-        result.iteration_entities_count = input(
-            "please enter a number of entities to read from " + str(self.__file_path))
+        x = input()
+        j = json.loads(x)
+        result.source_folder_path = j["source_folder_path"] #TODO: reflection
+        result.iteration_entities_count = j["iteration_entities_count"]
         return result
 
     def end(self, connector_result: ConnectorResult):
