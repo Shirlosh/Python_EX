@@ -1,6 +1,5 @@
 import json
 import os
-from pathlib import Path
 from asserts.DataModels import ConnectorParams, ConnectorResult
 
 
@@ -21,40 +20,40 @@ class SubProcessInputOutputHandler(object):
     def end(self, connector_result: ConnectorResult):
         for k in connector_result.alerts:
             if connector_result.alerts[k] is not None:
-                response = self.handle_response(k, connector_result.alerts[k])
+                response = self.__handle_response(k, connector_result.alerts[k])
                 print(k, ':', response)
 
     # Create a ConnectorResponse from a VT response
     # Evaluating the url using 'reputation' field
-    def handle_response(self, resource, data):
+    def __handle_response(self, resource, data):
 
         rep = data['data']['attributes']['reputation']
 
         if rep >= 0:
             result = "not suspicious"
         else:
-            result = self.format_response_answer(data)
+            result = self.__format_response_answer(data)
 
         return result
 
     # Formatting the result to a string result
     # The result contains the malicious/ suspicious files name and amount
-    def format_response_answer(self, data):
+    def __format_response_answer(self, data):
         stats: dict = data['data']['attributes']['last_analysis_stats']
         webs: dict = data['data']['attributes']['last_analysis_results']
 
         result = "** suspicious **" + os.linesep
         result += '\t' + str(stats.get("malicious")) + " malicious files: " + os.linesep
-        result += self.find_specific_category(webs, "malicious")
+        result += self.__find_specific_category(webs, "malicious", )
         result += '\t' + str(stats.get("suspicious")) + " suspicious files: " + os.linesep
-        result += self.find_specific_category(webs, "suspicious")
+        result += self.__find_specific_category(webs, "suspicious", )
 
         return result
 
     # Find the requested category in the dictionary(webs_dir)
     # Returns the string value of it
     @staticmethod
-    def find_specific_category(self, webs_dir, category):
+    def __find_specific_category(webs_dir, category):
         res = ""
         for k in webs_dir.items():
             var = k[1].get('category')

@@ -1,13 +1,8 @@
 import glob
 from pathlib import Path
-
 from IO.SubProcessInputOutputHandler import SubProcessInputOutputHandler
-import sys
 import os
-
 from VirusTotal.VirusTotalProcess import VirusTotalProcess
-
-interval_id = None
 
 
 class VirusTotalConnector:
@@ -18,7 +13,7 @@ class VirusTotalConnector:
         io_mgr = SubProcessInputOutputHandler()
         VT_process = VirusTotalProcess()
         connector_params = io_mgr.connector_params
-        file_path = self.get_random_file(connector_params)
+        file_path = self.__get_random_file(connector_params)
 
         connector_result = VT_process.run(file_path, connector_params.iteration_entities_count)
 
@@ -26,7 +21,7 @@ class VirusTotalConnector:
         # done_suffix(file_path)
 
     @staticmethod
-    def is_contain_format(self, folder_path, prefix):
+    def __is_contain_format(folder_path, prefix):
         files_counter = len(glob.glob1(folder_path, "*." + prefix))
         if files_counter > 0:
             return True
@@ -35,13 +30,13 @@ class VirusTotalConnector:
 
     # get a file path and changes the file suffix to .done
     @staticmethod
-    def done_suffix(self, file_path):
+    def __done_suffix(file_path):
         new_file_path = str(file_path) + ".done"
         os.rename(file_path, new_file_path)
 
     # get a random file from the source folder
     # init file_path and return its value
-    def get_random_file(self, connector_params):
+    def __get_random_file(self, connector_params):
         files = Path(connector_params.source_folder_path).glob('*.' + self.FILE_FORMAT)
         file_path = next(files)
         return file_path

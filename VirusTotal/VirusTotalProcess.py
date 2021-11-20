@@ -24,8 +24,8 @@ class VirusTotalProcess:
         for i in range(iteration_count):
             url = random.choice(self.__urls)
             response = self.__scanURL(url)
-            self.handle_response(url, response)
-            self.deleteURL_from_list(url)
+            self.__handle_response(url, response)
+            self.__deleteURL_from_list(url)
 
         return self.__connector_result
 
@@ -57,10 +57,10 @@ class VirusTotalProcess:
         self.__connector_result.alerts = dict.fromkeys(self.__urls)
 
     # Removes a specific url from the URLs list
-    def deleteURL_from_list(self, url):
+    def __deleteURL_from_list(self, url):
         self.__urls.remove(url)
 
     # Init the connector_result.alerts dictionary with the response data
-    def handle_response(self, resource, response):
+    def __handle_response(self, resource, response):
         data = json.loads(response.content)
         self.__connector_result.alerts[resource] = data
