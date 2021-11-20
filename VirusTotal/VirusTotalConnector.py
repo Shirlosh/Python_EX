@@ -44,15 +44,19 @@ class VirusTotalConnector:
         return file_path
 
 
-# TODO: redesign this:
-if __name__ == "__main__":
-    vt = VirusTotalConnector()
-    vt.main()
+def mainWrapper():
+    try:
+        vt = VirusTotalConnector()
+        vt.main()
+    except ConnectionRefusedError as e:
+        print(e)
 
-    # try:
-    #         main()
-    #         # TODO: setinterval(main, time) instead of calling main
-    #     else:
-    #         raise ImportError("the requested folder path is invalid")
-    # except Exception as e:
-    #     print(e.__class__)
+    except IOError as e:
+        raise print(e)
+    #
+    # except Exception:
+    #     print("unknown error occur")
+
+
+if __name__ == "__main__":
+    mainWrapper()

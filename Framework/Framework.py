@@ -1,19 +1,23 @@
-from SubProcessFactory import SubProcessFactory
 from apscheduler.schedulers.background import BackgroundScheduler
+from VTConnectorFactory import VTConnectorFactory
 
 INPUT1_PATH = r"C:\Users\oveda\Desktop\Python Siemplfy\asserts\lib\json-input\input1.json"
 
 
 def handle_output(sb):
-    out = sb.run()
-    print(out)
+    bout, berr = sb.run()
+    err = berr.decode()
+    out = bout.decode()
+
+    if err:
+        print("Errors:" + err)
+    if out:
+        print("output:" + out)
 
 
 def run():
     sched = BackgroundScheduler()
-    sb_array = [SubProcessFactory(INPUT1_PATH)]
-
-    out = sb_array[0].run()
+    sb_array = [VTConnectorFactory(INPUT1_PATH)]
 
     for sb in sb_array:
 
@@ -31,10 +35,6 @@ def run():
 if __name__ == "__main__":
     run()
 
-# TODO:
-# class wrapper
-# handle_output
-# exceptions
 
 
 

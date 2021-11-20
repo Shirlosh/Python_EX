@@ -11,13 +11,13 @@ class VirusTotalProcess:
     __VT_URL = "https://www.virustotal.com/api/v3/urls/"
     __urls: list
     __connector_result = ConnectorResult()
-    folder_path = 'C:\\\\Users\\\\oveda\\\\Desktop\\\\Python Siemplfy\\\\asserts\\\\lib\\\\URLSource1\\\\Source1.json'
+    #folder_path = 'C:\\\\Users\\\\oveda\\\\Desktop\\\\Python Siemplfy\\\\asserts\\\\lib\\\\URLSource1\\\\Source1.json' #DEBUG
 
     #  Launch the desired amount of URL requests to the server
     #  Returns ConnectorResult as an answer (a dictionary of answers)
     def run(self, file_path, iteration_count):
         self.__init_urls(file_path)
-        #self.__init_urls(self.folder_path)
+        #self.__init_urls(self.folder_path) #DEBUG
         self.__init_connectorResult()
         iteration_count = int(iteration_count)
 

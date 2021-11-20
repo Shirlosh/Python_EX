@@ -1,10 +1,10 @@
+from ConnectorFactory import ConnectorFactory
 import json
 import subprocess
 from asserts.DataModels import ConnectorSettings
 
 
-# TODO: factory as a abstract class and this as vtfactory
-class SubProcessFactory:
+class VTConnectorFactory(ConnectorFactory):
     __connector_settings = ConnectorSettings()
     __process = None
     __out = None
@@ -15,7 +15,7 @@ class SubProcessFactory:
         dict_connector = data[ConnectorSettings.__name__][0]
         self.__init_instance_from_json(dict_connector)
 
-    # ab
+    # override
     def run(self):
         self.__createSubProcess()
         return self.__setCommunication()
