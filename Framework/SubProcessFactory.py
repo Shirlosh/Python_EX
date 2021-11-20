@@ -2,7 +2,8 @@ import json
 import subprocess
 from asserts.DataModels import ConnectorSettings
 
-#TODO: factory as a abstract class and this as vtfactory
+
+# TODO: factory as a abstract class and this as vtfactory
 class SubProcessFactory:
     __connector_settings = ConnectorSettings()
     __process = None
@@ -14,6 +15,7 @@ class SubProcessFactory:
         dict_connector = data[ConnectorSettings.__name__][0]
         self.__init_instance_from_json(dict_connector)
 
+    # ab
     def run(self):
         self.__createSubProcess()
         return self.__setCommunication()
@@ -36,3 +38,8 @@ class SubProcessFactory:
         for attribute in cdir:
             setattr(self.__connector_settings, attribute, dict_connector[attribute])
 
+    def get_interval(self):
+        return self.__connector_settings.run_interval_seconds
+
+    def get_output_path(self):
+        return self.__connector_settings.output_folder_path

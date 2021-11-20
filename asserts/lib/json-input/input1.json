@@ -1,7 +1,7 @@
 {
 "ConnectorSettings": [
     {
-        "run_interval_seconds": "1000",
+        "run_interval_seconds": "5",
 	"script_file_path": "C:\\Users\\oveda\\Desktop\\Python Siemplfy\\VirusTotal\\VirusTotalConnector.py",
 	"connector_name": "VT-connector",
 	"params": {
