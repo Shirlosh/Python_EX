@@ -2,10 +2,8 @@ import base64
 import json
 import os
 import random
-
 import requests
-
-from asserts.DataModels import ConnectorParams, ConnectorResult
+from asserts.DataModels import ConnectorResult
 
 
 class VirusTotalProcess:
@@ -15,13 +13,13 @@ class VirusTotalProcess:
     __connector_result = ConnectorResult()
     folder_path = 'C:\\\\Users\\\\oveda\\\\Desktop\\\\Python Siemplfy\\\\asserts\\\\lib\\\\URLSource1\\\\Source1.json'
 
-    #  launch the desired amount of URL requests to the server
-    #  returns ConnectorResult as an answer (a dictionary of answers)
-    def run(self, connector_params: ConnectorParams):
-        self.__init_urls(connector_params.source_folder_path)
+    #  Launch the desired amount of URL requests to the server
+    #  Returns ConnectorResult as an answer (a dictionary of answers)
+    def run(self, file_path, iteration_count):
+        self.__init_urls(file_path)
         #self.__init_urls(self.folder_path)
         self.__init_connectorResult()
-        iteration_count = int(connector_params.iteration_entities_count)
+        iteration_count = int(iteration_count)
 
         for i in range(iteration_count):
             url = random.choice(self.__urls)
@@ -49,22 +47,20 @@ class VirusTotalProcess:
         resource_base64 = base64.urlsafe_b64encode(resource.encode()).decode().strip("=")
         return self.__VT_URL + resource_base64
 
-    # init URLS array variable
+    # Init URLS array variable
     def __init_urls(self, file_path):
-        #with open(file_path, 'rb') as json_file:
-            #data = json.loads(json_file)
         data = json.loads(open(file_path).read())
         self.__urls = data
 
-    # init connector result
+    # Init connector result
     def __init_connectorResult(self):
         self.__connector_result.alerts = dict.fromkeys(self.__urls)
 
-    # removes a specific url from the URLs list
+    # Removes a specific url from the URLs list
     def deleteURL_from_list(self, url):
         self.__urls.remove(url)
 
-    # s
+    # Init the connector_result.alerts dictionary with the response data
     def handle_response(self, resource, response):
         data = json.loads(response.content)
         self.__connector_result.alerts[resource] = data

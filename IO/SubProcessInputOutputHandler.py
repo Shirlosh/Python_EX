@@ -8,10 +8,6 @@ class SubProcessInputOutputHandler(object):
     __folder_path = None
     __file_format = None
     __file_path = None
-    #
-    # def __init__(self, folder_path, file_format):
-    #     self.__folder_path = folder_path
-    #     self.__file_format = file_format
 
     @property
     def connector_params(self):
@@ -28,15 +24,8 @@ class SubProcessInputOutputHandler(object):
                 response = self.handle_response(k, connector_result.alerts[k])
                 print(k, ':', response)
 
-    # get a random file from the source folder
-    # init file_path and return its value
-    def get_random_file(self):
-        files = Path(self.__folder_path).glob('*.' + self.__file_format)
-        self.__file_path = next(files)
-        return self.__file_path
-
-    # create a ConnectorResponse from a VT response
-    # evaluating the url using 'reputation' field
+    # Create a ConnectorResponse from a VT response
+    # Evaluating the url using 'reputation' field
     def handle_response(self, resource, data):
 
         rep = data['data']['attributes']['reputation']
@@ -48,8 +37,8 @@ class SubProcessInputOutputHandler(object):
 
         return result
 
-    # formatting the result to a string result
-    # the result contains the malicious/ suspicious files name and amount
+    # Formatting the result to a string result
+    # The result contains the malicious/ suspicious files name and amount
     def format_response_answer(self, data):
         stats: dict = data['data']['attributes']['last_analysis_stats']
         webs: dict = data['data']['attributes']['last_analysis_results']
@@ -62,6 +51,9 @@ class SubProcessInputOutputHandler(object):
 
         return result
 
+    # Find the requested category in the dictionary(webs_dir)
+    # Returns the string value of it
+    @staticmethod
     def find_specific_category(self, webs_dir, category):
         res = ""
         for k in webs_dir.items():

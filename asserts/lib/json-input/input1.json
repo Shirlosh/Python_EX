@@ -5,7 +5,7 @@
 	"script_file_path": "C:\\Users\\oveda\\Desktop\\Python Siemplfy\\VirusTotal\\VirusTotalConnector.py",
 	"connector_name": "VT-connector",
 	"params": {
-        	"source_folder_path": "C:\\Users\\oveda\\Desktop\\Python Siemplfy\\asserts\\lib\\URLSource1\\Source1.json",
+        	"source_folder_path": "C:\\Users\\oveda\\Desktop\\Python Siemplfy\\asserts\\lib\\URLSource1",
         	"iteration_entities_count": 4
    	},
 	"output_folder_path": "C:\\Users\\oveda\\Desktop\\Python Siemplfy\\assert\\lib\\VirusTotal-output"
