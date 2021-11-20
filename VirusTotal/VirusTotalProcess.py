@@ -5,7 +5,7 @@ import random
 
 import requests
 
-from Assert.DataModels import ConnectorParams, ConnectorResult
+from asserts.DataModels import ConnectorParams, ConnectorResult
 
 
 class VirusTotalProcess:
