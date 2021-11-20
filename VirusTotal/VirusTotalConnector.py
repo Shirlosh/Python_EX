@@ -9,22 +9,30 @@ class VirusTotalConnector:
     FILE_FORMAT = "json"
 
     def main(self):
-        # Connect API and get data (via stdin)
+
         io_mgr = SubProcessInputOutputHandler()
         VT_process = VirusTotalProcess()
+
+        # Connect API and get data (via stdin)
         connector_params = io_mgr.connector_params
-        file_path = self.__get_random_file(connector_params)
 
-        # Process Data
-        connector_result = VT_process.run(file_path, connector_params.iteration_entities_count)
+        if self.__is_contain_format(connector_params.source_folder_path, self.FILE_FORMAT) is True:
+            file_path = self.__get_random_file(connector_params)
 
-        # Send data back to Framework(via stdout)
-        io_mgr.end(connector_result)
-        # done_suffix(file_path)
+            # Process Data
+            connector_result = VT_process.run(file_path, connector_params.iteration_entities_count)
 
+            # Send data back to Framework(via stdout)
+            io_mgr.end(connector_result)
+            self.__done_suffix(file_path)
+
+        else:
+            self.__end_process("all the source files in this folder have been checked")
+
+    # checks if the folder has files with the required suffix
     @staticmethod
-    def __is_contain_format(folder_path, prefix):
-        files_counter = len(glob.glob1(folder_path, "*." + prefix))
+    def __is_contain_format(folder_path, suffix):
+        files_counter = len(glob.glob1(folder_path, "*." + suffix))
         if files_counter > 0:
             return True
         else:
@@ -43,6 +51,11 @@ class VirusTotalConnector:
         file_path = next(files)
         return file_path
 
+    @staticmethod
+    def __end_process(message):
+        print(message)
+        exit(1)
+
 
 def mainWrapper():
     try:
@@ -53,9 +66,9 @@ def mainWrapper():
 
     except IOError as e:
         raise print(e)
-    #
-    # except Exception:
-    #     print("unknown error occur")
+
+    except Exception:
+        print("unknown error occur")
 
 
 if __name__ == "__main__":

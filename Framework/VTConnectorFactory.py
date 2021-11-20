@@ -1,3 +1,5 @@
+import os
+
 from ConnectorFactory import ConnectorFactory
 import json
 import subprocess
@@ -10,6 +12,9 @@ class VTConnectorFactory(ConnectorFactory):
     __out = None
 
     def __init__(self, setting_path):
+        if os.path.exists(setting_path) is False:
+            raise IOError("input file path is incorrect, please try again")
+
         with open(setting_path) as json_file:
             data = json.load(json_file)
         dict_connector = data[ConnectorSettings.__name__][0]
