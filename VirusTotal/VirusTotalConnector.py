@@ -6,17 +6,19 @@ from VirusTotal.VirusTotalProcess import VirusTotalProcess
 
 
 class VirusTotalConnector:
-
     FILE_FORMAT = "json"
 
     def main(self):
+        # Connect API and get data (via stdin)
         io_mgr = SubProcessInputOutputHandler()
         VT_process = VirusTotalProcess()
         connector_params = io_mgr.connector_params
         file_path = self.__get_random_file(connector_params)
 
+        # Process Data
         connector_result = VT_process.run(file_path, connector_params.iteration_entities_count)
 
+        # Send data back to Framework(via stdout)
         io_mgr.end(connector_result)
         # done_suffix(file_path)
 
