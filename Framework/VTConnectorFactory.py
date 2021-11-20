@@ -18,7 +18,7 @@ class VTConnectorFactory(ConnectorFactory):
         with open(setting_path) as json_file:
             data = json.load(json_file)
         dict_connector = data[ConnectorSettings.__name__][0]
-        self.__init_instance_from_json(dict_connector)
+        self.__init_connector_setting_from_json(dict_connector)
 
     # override
     def run(self):
@@ -34,11 +34,13 @@ class VTConnectorFactory(ConnectorFactory):
             stderr=subprocess.PIPE,
             close_fds=True)
 
+    # set process communication and execute it
+    # return process output
     def __setCommunication(self):
         data = json.dumps(self.__connector_settings.params).encode('utf-8')
         return self.__process.communicate(data)
 
-    def __init_instance_from_json(self, dict_connector):
+    def __init_connector_setting_from_json(self, dict_connector):
         cdir = [a for a in ConnectorSettings.__dict__ if not a.startswith('__')]
         for attribute in cdir:
             setattr(self.__connector_settings, attribute, dict_connector[attribute])

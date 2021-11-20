@@ -6,3 +6,4 @@
 '{"source_folder_path": "path", "iteration_entities_count": "counts"}'
 )
 
+# framework input path is hard coded at Framework -> framework.py

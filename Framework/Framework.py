@@ -5,7 +5,8 @@ import warnings
 INPUT1_PATH = r"C:\Users\oveda\Desktop\Python Siemplfy\asserts\lib\json-input\input1.json"
 INPUT2_PATH = r"C:\Users\oveda\Desktop\Python Siemplfy\asserts\lib\json-input\input2.json"
 
-
+# get process byte output and print it to screen TODO: print to file!!!
+# relative path check
 def handle_output(sb):
     bout, berr = sb.run()
     err = berr.decode()

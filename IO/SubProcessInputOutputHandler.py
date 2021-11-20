@@ -13,7 +13,7 @@ class SubProcessInputOutputHandler(object):
         result = ConnectorParams()
         x = input()
         j = json.loads(x)
-        result.source_folder_path = j["source_folder_path"]
+        result.source_folder_path = j["source_folder_path"] #TODO: reflection
         result.iteration_entities_count = j["iteration_entities_count"]
         #result.source_folder_path = r"C:\\Users\\oveda\\Desktop\\Python Siemplfy\\asserts\\lib\\URLSource1" #DEBUG
         #result.iteration_entities_count = 4 #DEBUG
