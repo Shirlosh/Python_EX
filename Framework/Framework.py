@@ -1,5 +1,6 @@
 from apscheduler.schedulers.background import BackgroundScheduler
 from VTConnectorFactory import VTConnectorFactory
+import warnings
 
 INPUT1_PATH = r"C:\Users\oveda\Desktop\Python Siemplfy\asserts\lib\json-input\input1.json"
 
@@ -10,17 +11,17 @@ def handle_output(sb):
     out = bout.decode()
 
     if err:
-        print("Errors:" + err)
+        print("Errors- " + err)
     if out:
-        print("output:" + out)
+        print("output- " + out)
 
 
 def run():
     sched = BackgroundScheduler()
+    warnings.filterwarnings("ignore")  # ignore module time area warnings
     sb_array = [VTConnectorFactory(INPUT1_PATH)]
 
     for sb in sb_array:
-
         def wrapper():
             handle_output(sb)
 
@@ -34,7 +35,3 @@ def run():
 
 if __name__ == "__main__":
     run()
-
-
-
-
