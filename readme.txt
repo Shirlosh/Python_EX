@@ -7,3 +7,8 @@
 )
 
 # framework input path is hard coded at Framework -> framework.py
+
+
+# some unhandled issue I found and haven't repaired :
+    * sometimes an error occur when 2 process running together
+    * the some of the output text disappear when I print it to the console (to file its work well)
