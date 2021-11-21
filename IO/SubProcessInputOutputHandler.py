@@ -5,8 +5,6 @@ from asserts.DataModels import ConnectorParams, ConnectorResult
 
 class SubProcessInputOutputHandler(object):
     __folder_path = None
-    __file_format = None
-    __file_path = None
 
     @property
     def connector_params(self):
@@ -15,8 +13,8 @@ class SubProcessInputOutputHandler(object):
         j = json.loads(x)
         result.source_folder_path = j["source_folder_path"] #TODO: reflection
         result.iteration_entities_count = j["iteration_entities_count"]
-        #result.source_folder_path = r"C:\\Users\\oveda\\Desktop\\Python Siemplfy\\asserts\\lib\\URLSource1" #DEBUG
-        #result.iteration_entities_count = 4 #DEBUG
+        # result.source_folder_path = r"C:\\Users\\oveda\\Desktop\\Python Siemplfy\\asserts\\lib\\URLSource1"  # DEBUG
+        # result.iteration_entities_count = 4  # DEBUG
         return result
 
     def end(self, connector_result: ConnectorResult):
@@ -29,8 +27,8 @@ class SubProcessInputOutputHandler(object):
     # Evaluating the url using 'reputation' field
     def __handle_response(self, resource, data):
 
-        if len(data['error']) > 0:
-            message =  data['error']['message']
+        if 'error' in data:
+            message = data['error']['message']
             raise ConnectionRefusedError("an issue occur with VT server:" + message)
 
         rep = data['data']['attributes']['reputation']

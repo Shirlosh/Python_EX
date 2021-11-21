@@ -38,7 +38,12 @@ class VTConnectorFactory(ConnectorFactory):
     # return process output
     def __setCommunication(self):
         data = json.dumps(self.__connector_settings.params).encode('utf-8')
-        return self.__process.communicate(data)
+        try:
+            out = self.__process.communicate(data)
+        except Exception as e:
+            raise Exception("an error with connector communicate occur")
+
+        return out
 
     def __init_connector_setting_from_json(self, dict_connector):
         cdir = [a for a in ConnectorSettings.__dict__ if not a.startswith('__')]

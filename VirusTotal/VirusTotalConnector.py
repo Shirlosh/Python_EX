@@ -65,10 +65,10 @@ def mainWrapper():
         print(e)
 
     except IOError as e:
-        raise print(e)
-
-    except Exception:
-        print("unknown error occur")
+        print(e)
+    #
+    # except Exception:
+    #     print("unknown error occur")
 
 
 if __name__ == "__main__":

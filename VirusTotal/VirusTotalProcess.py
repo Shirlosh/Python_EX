@@ -49,7 +49,10 @@ class VirusTotalProcess:
 
     # Init URLS array variable
     def __init_urls(self, file_path):
-        data = json.loads(open(file_path).read())
+        try:
+            data = json.loads(open(file_path).read())
+        except Exception as e:
+            raise IOError("an error with json file occur" + str(file_path))
         self.__urls = data
 
     # Init connector result
