@@ -31,6 +31,7 @@ def run():
     sched = BackgroundScheduler()
     warnings.filterwarnings("ignore")  # ignore module time area warnings
     sb_array = [VTConnectorFactory(INPUT1_PATH), VTConnectorFactory(INPUT2_PATH)]
+    # sb_array = [VTConnectorFactory(INPUT1_PATH)] # should work good !
 
     for sb in sb_array:
         def wrapper():
